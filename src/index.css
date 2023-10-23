@@ -1,0 +1,95 @@
+body{
+   
+}
+.wrapper{
+    background-color: #fff;
+    padding: 40px ;
+    margin: 20px 0px;
+    border-radius: 10px;
+    border: 2px solid gray;
+}
+.cust-row{
+    padding:0px 50px;
+}
+.cust-card{
+    margin-top: 30px;
+}
+.ellipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.pro-img{
+    margin: 10px 50px;
+}
+.heart{
+    color: rgb(106, 102, 102);
+    display: flex;
+    justify-content: flex-end;
+}
+.favourite{
+    margin: 10px;
+    
+}
+.add-to-cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+.checked{
+    color: orange;
+}
+.login-cart-div{
+    display: flex;
+    gap: 10px;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+}
+.spans{
+    font-size: 35px;
+}
+.blue{
+    color: rgb(8, 149, 237);
+}
+.outer{
+    margin: 10px 20px;
+}
+.gap{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+}
+.cust-col-sm-6{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.color-red{
+    color: red;
+}
+.cart-img-details{
+    border: 1px solid rgb(227, 226, 226);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.cart-outer{
+    margin: 50px;
+}
+.without-del{
+    display: flex;
+    gap: 30px;
+}
+.details{
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
