@@ -13,10 +13,13 @@ function CartItems() {
 
   return (
     <div className="outer-row">
-      <div className="row">
+      <div className="cart-items-gap">
+
         {products.map((product) => (
           <CartItem data={product} key={product.id} />
+          
         ))}
+        
       </div>
     </div>
   );

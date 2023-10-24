@@ -1,8 +1,14 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function LoginPage() {
+  const [requestResponse, setRequestResponse] = useState({
+    textMessage: "",
+    alertClass: "",
+  });
   const initialValues = {
     email: "",
     password: "",
@@ -22,6 +28,9 @@ function LoginPage() {
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <div className="wrapper">
+            <div class={requestResponse.alertClass} role="alert">
+              {requestResponse.textMessage}
+            </div>
             <h2>Login</h2>
             <hr />
             <Formik
@@ -65,7 +74,8 @@ function LoginPage() {
                     </div>
                     <br />
                     <p className="text-center">
-                      Don't have an account? Sign up <Link to="/signup">here.</Link>
+                      Don't have an account? Sign up{" "}
+                      <Link to="/signup">here.</Link>
                     </p>
                     <Field
                       type="submit"
