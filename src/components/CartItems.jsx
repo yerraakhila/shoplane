@@ -1,26 +1,21 @@
 import CartItem from "./CartItem";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function CartItems() {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://fakestoreapi.com/products/")
-      .then((Response) => setProducts(Response.data))
-      .catch((error) => console.log(error));
-  }, []);
-
+  let itemsInCart = useSelector((state) => state.cart.cartItemsList);
   return (
+    
     <div className="outer-row">
-      <div className="cart-items-gap">
-
-        {products.map((product) => (
+      {itemsInCart && <div className="cart-items-gap">
+        {itemsInCart.map((product) => (
           <CartItem data={product} key={product.id} />
-          
         ))}
-        
-      </div>
+      </div>}
+
+      {!itemsInCart.length && <div className="empty">
+        <h2>Your Cart is Empty</h2>
+        </div>}
+      
     </div>
   );
 }

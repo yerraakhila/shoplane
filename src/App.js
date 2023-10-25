@@ -9,6 +9,7 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import NavAndSub from './components/NavAndSub';
 import ProductsByCategory from './components/ProductsByCategory';
 import CartPage from './pages/CartPage';
+import WishlistPage from './pages/WishlistPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
         <Route path='/productDetailPage/:id' element={<ProductDetailPage />} />
         <Route path='/subcategory/:api' element={<ProductsByCategory />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
     </BrowserRouter>
   );

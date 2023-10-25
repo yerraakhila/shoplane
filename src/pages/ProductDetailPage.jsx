@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import ProductDetail from "../components/ProductDetail";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/reducers/CartSlice";
+import { AiFillStar } from "react-icons/ai";
+
+
 
 function ProductDetailPage() {
+
+  
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
@@ -13,11 +19,54 @@ function ProductDetailPage() {
       .catch((error) => console.log(error));
   }, []);
 
-//   if (!product) return null;
+  let dispatch = useDispatch();
+  function handleAddToCart() {
+    dispatch(addToCart(product));
+    console.log(product)
 
-  if (!product.rating) return null;
+  }
+  
+  if (!product) return null;
 
-  return <ProductDetail data={product} />;
+  if (!product.rating ) return null;
+
+  return (
+    <div className="container">
+      <div className="wrapper">
+        <div className="row">
+          <div className="col-sm-6 cust-col-sm-6">
+            <img
+              src={product.image}
+              alt=""
+              height="400px"
+              width="300px"
+              className="img-fluid"
+            />
+          </div>
+          <div className="col-sm-6 gap">
+            <h4>{product.title}</h4>
+            <p>{product.description}</p>
+            <h2>${product.price}</h2>
+            <div>
+              <AiFillStar className={product.rating.rate > 0.5 ? "checked" : ""} />
+              <AiFillStar className={product.rating.rate > 1.5 ? "checked" : ""} />
+              <AiFillStar className={product.rating.rate > 2.5 ? "checked" : ""} />
+              <AiFillStar className={product.rating.rate > 3.5 ? "checked" : ""} />
+              <AiFillStar className={product.rating.rate > 4.5 ? "checked" : ""} />(
+              {product.rating.count})
+            </div>
+            <br></br>
+            <button
+              className="btn btn-primary"
+              onClick={() => handleAddToCart()}
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export default ProductDetailPage;

@@ -1,8 +1,10 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function Navbar() {
   const navigate = useNavigate();
+  let numitemsInCart = useSelector((state)=>state.cart.cartItemsNum)
   return (
     <div className="header">
       <div className="spans">
@@ -27,15 +29,19 @@ function Navbar() {
             <Link class="dropdown-item" to="/signup">
               Sign Up
             </Link>
-            <a class="dropdown-item" href="#">
-              Favorites
-            </a>
+            <Link class="dropdown-item" to="/wishlist">
+              Wishlist
+            </Link>
             <Link class="dropdown-item" to="/cart">
               Cart
             </Link>
           </div>
         </div>
-        <AiOutlineShoppingCart size={40} onClick={()=> navigate("/cart")} />
+        <div className="cart-and-num"  >
+          <AiOutlineShoppingCart size={40} onClick={()=> navigate("/cart")} />
+          <button className="small">{numitemsInCart}</button>
+        </div>
+        
       </div>
     </div>
   );

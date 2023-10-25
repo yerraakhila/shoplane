@@ -2,27 +2,42 @@ import { useEffect, useState } from "react";
 import { AiFillHeart, AiFillStar } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart, deleteFromCart } from "../redux/reducers/CartSlice";
+import { addToWishlist } from "../redux/reducers/WishlistSlice";
 
 function Product(props) {
-  const [favClick, setFavClick] = useState(false);
+  const [addToCartstatus,setAddToCartstatus] = useState(false)
+  // const [favClick, setFavClick] = useState(false);
+  let dispatch = useDispatch();
   let navigate = useNavigate();
   const { image, rating, price, title, id } = props.data;
   function handleClick(e) {
     e.preventDefault();
     navigate("/productDetailPage/" + id);
+    
   }
-  function handleFavClick(e) {
-    e.preventDefault();
-    setFavClick(!favClick);
+  function handleFavClick() {
+    // setFavClick(!favClick)
+    dispatch(addToWishlist(props.data));
+  }
+  
+  function handleAddToCart() {
+    setAddToCartstatus(!addToCartstatus)
+    !addToCartstatus ? dispatch(addToCart(props.data)) : dispatch(deleteFromCart(props.data))
+    
+
+    
   }
   return (
     <div class="col-sm-3">
       <div class="card cust-card">
         <div className="heart ">
           <AiFillHeart
-            className={favClick ? "favourite color-red" : "favourite"}
+          className="favourite"
+            // className={favClick ? "favourite color-red" : "favourite"}
             size={25}
-            onClick={handleFavClick}
+            onClick={()=>handleFavClick()}
           />
         </div>
 
@@ -48,12 +63,12 @@ function Product(props) {
             </div>
           </p>
           <h6>${price}</h6>
-          <a href="#" class="btn btn-primary btn-block add-to-cart">
-            <div class="add-to-cart">
+          <div onClick={() => handleAddToCart()} className="btn btn-primary btn-block">
+            <div className="add-to-cart">
               <FaShoppingCart />
-              <a>Add to Cart</a>
+              <a>{!addToCartstatus ? "Add to Cart" : "Remove from Cart"}</a>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>

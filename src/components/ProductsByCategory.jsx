@@ -6,8 +6,6 @@ import { useParams } from "react-router-dom";
 
 function ProductsByCategory(){
     const { api } = useParams();
-    
-    console.log(api)
     const [productsCat, setProductsCat] = useState([]);
   useEffect(() => {
     axios

@@ -35,7 +35,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
 .checked{
     color: orange;
@@ -89,10 +89,9 @@ body{
     gap: 30px;
 }
 .details{
-    padding: 10px 0px;
+    padding:  0px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 .outer-row{
     padding: 20px;
@@ -131,4 +130,45 @@ h3{
 }
 .another{
     padding-bottom: 0px;
+}
+.cart-and-num{
+    display: flex;
+    align-items: flex-start;
+}
+.small{
+    background-color: red;
+    border-radius: 100%;
+    color:white;
+    padding: 0px 5px;
+    border: none;
+}
+.common{
+    border: none;
+    border: 1px solid gray;
+    border-radius: 2px;
+    
+}
+.numberDisplay{
+    padding: 0px 10px;
+    margin: 2px;
+    background-color: rgb(223, 220, 219);
+}
+.symbol{
+    padding: 0px 5px;
+    background-color: rgb(244, 241, 239);
+}
+.heading{
+    padding-bottom: 50px;
+}
+.buttons{
+    padding-bottom: 15px;
+}
+.empty{
+    display: flex;
+    justify-content: center;
+    color: red;
+    padding: 150px;
+}
+.red{
+    background-color: red;
 }
