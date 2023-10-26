@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import NavAndSub from './../components/NavAndSub';
 
 function ProductsByCategory(){
     const { api } = useParams();
@@ -15,13 +16,17 @@ function ProductsByCategory(){
   }, [api]);
 //   console.log(productsCat)
   return (
+    <>
+    <NavAndSub/>
     <div>
       <div className="row cust-row">
+      
         {productsCat.map((product) => (
           <Product data={product} key={product.id} />
         ))}
       </div>
     </div>
+    </>
   );
 }
  export default ProductsByCategory;

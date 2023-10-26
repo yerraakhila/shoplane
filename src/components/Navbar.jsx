@@ -1,10 +1,26 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useEffect, useState } from "react";
 
 function Navbar() {
   const navigate = useNavigate();
-  let numitemsInCart = useSelector((state)=>state.cart.cartItemsNum)
+  let numitemsInCart = useSelector((state) => state.cart.cartItemsNum);
+  const [loginStatus, setLoginStatus] = useState(false);
+  useEffect(() => {
+    let token = localStorage.getItem('token');
+    console.log(token)
+    if(token) {
+      setLoginStatus(true);
+      console.log("hi")
+    } else {
+      setLoginStatus(false);
+    }
+  }, []);
+  function handleLogout() {
+    localStorage.clear();
+    setLoginStatus(false);
+  }
   return (
     <div className="header">
       <div className="spans">
@@ -19,10 +35,10 @@ function Navbar() {
             data-toggle="dropdown"
             aria-expanded="false"
           >
-            Login or Sign up
-            
+            {!loginStatus ? "Login or Sign up" : "Logout"}
           </button>
-          <div class="dropdown-menu">
+          {!loginStatus ?
+            <div class="dropdown-menu">
             <Link class="dropdown-item" to="/login">
               Login
             </Link>
@@ -35,13 +51,25 @@ function Navbar() {
             <Link class="dropdown-item" to="/cart">
               Cart
             </Link>
-          </div>
+          </div> : 
+          <div class="dropdown-menu">
+          <Link class="dropdown-item" to="/" onClick={handleLogout}>
+            Logout
+          </Link>
+          <Link class="dropdown-item" to="/wishlist">
+            Wishlist
+          </Link>
+          <Link class="dropdown-item" to="/cart">
+            Cart
+          </Link>
         </div>
-        <div className="cart-and-num"  >
-          <AiOutlineShoppingCart size={40} onClick={()=> navigate("/cart")} />
+          }
+          
+        </div>
+        <div className="cart-and-num">
+          <AiOutlineShoppingCart size={40} onClick={() => navigate("/cart")} />
           <button className="small">{numitemsInCart}</button>
         </div>
-        
       </div>
     </div>
   );

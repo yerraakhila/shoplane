@@ -1,19 +1,46 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function RegisterPage() {
   const initialValues = {
     firstName: "",
+    lastName:"",
     email: "",
     mobile: "",
     password: "",
   };
+  const [responseRequest, setResponseRequest] = useState({
+    textMessage: "",
+    alertClass: "",
+  });
   function onSubmit(values) {
-    console.log(values);
+    axios
+      .post(
+        "https://orca-app-jhg4l.ondigitalocean.app/api/auth/register",
+        values
+      )
+      .then(
+        (response) => {
+          setResponseRequest({
+            textMessage: "Your account is created. Click 'here' at bottom to login",
+            alertClass: "alert alert-success",
+          });
+        },
+        (error) => {
+          setResponseRequest({
+            textMessage: error.response.data.message,
+            alertClass: "alert alert-danger",
+          });
+        }
+      )
+      .catch((error) => console.log(error));
   }
   const validationSchema = Yup.object({
     firstName: Yup.string().required("enter first name"),
+    lastName: Yup.string().required("enter last name"),
     email: Yup.string().required("enter email").email("enter valid email"),
     mobile: Yup.string().required("enter mobile number"),
     password: Yup.string()
@@ -26,6 +53,11 @@ function RegisterPage() {
         <div className="col-md-3"></div>
         <div className="col-md-6">
           <div className="wrapper">
+    
+          <div class={responseRequest.alertClass} role="alert">
+              {responseRequest.textMessage}
+            </div>
+          
             <h2>Sign up</h2>
             <hr />
             <Formik
@@ -46,6 +78,17 @@ function RegisterPage() {
                       />
                       <small className="text-danger">
                         <ErrorMessage name="firstName" />
+                      </small>
+                    </div>
+                    <div className="form-group">
+                      <label>Last Name</label>
+                      <Field
+                        name="lastName"
+                        className={formik.touched.lastName && formik.errors.lastName ? "form-control is-invalid" : "form-control"}
+                        type="text"
+                      />
+                      <small className="text-danger">
+                        <ErrorMessage name="lastName" />
                       </small>
                     </div>
                     <div className="form-group">
@@ -86,7 +129,7 @@ function RegisterPage() {
                 Already have an account? Login <Link to="/login">here.</Link>
             </p>
                     <Field
-                    type="button"
+                    type="submit"
                     value="Register"
                     className="btn btn-primary btn-block"
                     disabled={!formik.isValid}

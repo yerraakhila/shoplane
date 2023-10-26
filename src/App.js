@@ -6,7 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage';
 import ProductDetailPage from './pages/ProductDetailPage';
-import NavAndSub from './components/NavAndSub';
+
 import ProductsByCategory from './components/ProductsByCategory';
 import CartPage from './pages/CartPage';
 import WishlistPage from './pages/WishlistPage';
@@ -16,7 +16,7 @@ import WishlistPage from './pages/WishlistPage';
 function App() {
   return (
     <BrowserRouter>
-    <NavAndSub/>
+    
       <Routes>
         
         <Route path="/login" element={<LoginPage />} />

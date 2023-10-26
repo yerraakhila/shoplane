@@ -1,23 +1,46 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function LoginPage() {
+  let navigate = useNavigate()
   const [requestResponse, setRequestResponse] = useState({
     textMessage: "",
     alertClass: "",
   });
   const initialValues = {
-    email: "",
+    username: "",
     password: "",
   };
   function onSubmit(values) {
-    console.log(values);
+    axios
+      .post(
+        "https://fakestoreapi.com/auth/login",
+        values
+      )
+      .then(
+        (response) => {
+          setRequestResponse({
+            textMessage: "Login is successful",
+            alertClass: "alert alert-success",
+          });
+          localStorage.setItem('token',response.data.token);
+          localStorage.setItem('user',JSON.stringify(response.data.user));
+          navigate("/")
+        },
+        (error) => {
+          setRequestResponse({
+            textMessage: "invalid credentials",
+            alertClass: "alert alert-danger",
+          });
+        }
+      )
+      .catch((error) => console.log(error));
   }
   const validationSchema = Yup.object({
-    email: Yup.string().required("enter email").email("enter valid email"),
+    username: Yup.string().required("enter username"),
     password: Yup.string()
       .required("enter password")
       .min(6, "password must be minimum of 6 characters"),
@@ -43,18 +66,18 @@ function LoginPage() {
                 return (
                   <Form>
                     <div className="form-group">
-                      <label>Email</label>
+                      <label>Username</label>
                       <Field
                         type="text"
-                        name="email"
+                        name="username"
                         className={
-                          formik.touched.email && formik.errors.email
+                          formik.touched.username && formik.errors.username
                             ? "form-control is-invalid"
                             : "form-control"
                         }
                       />
                       <small className="text-danger">
-                        <ErrorMessage name="email" />
+                        <ErrorMessage name="username" />
                       </small>
                     </div>
                     <div className="form-group">

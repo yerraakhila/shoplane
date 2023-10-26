@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { AiFillHeart, AiFillStar } from "react-icons/ai";
+import { AiFillHeart, AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart, deleteFromCart } from "../redux/reducers/CartSlice";
-import { addToWishlist } from "../redux/reducers/WishlistSlice";
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from "../redux/reducers/WishlistSlice";
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function Product(props) {
-  const [addToCartstatus,setAddToCartstatus] = useState(false)
+  let wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
+  const [addToCartstatus, setAddToCartstatus] = useState(false);
   // const [favClick, setFavClick] = useState(false);
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -15,30 +20,40 @@ function Product(props) {
   function handleClick(e) {
     e.preventDefault();
     navigate("/productDetailPage/" + id);
-    
   }
-  function handleFavClick() {
-    // setFavClick(!favClick)
-    dispatch(addToWishlist(props.data));
-  }
-  
-  function handleAddToCart() {
-    setAddToCartstatus(!addToCartstatus)
-    !addToCartstatus ? dispatch(addToCart(props.data)) : dispatch(deleteFromCart(props.data))
-    
 
-    
+  let isInWishlist = wishlistItems.some((wishlist) => wishlist.id === id);
+
+  function handleFav() {
+    !isInWishlist
+      ? dispatch(addToWishlist(props.data))
+      : dispatch(deleteFromWishlist(props.data));
   }
+
+  function handleAddToCart() {
+    setAddToCartstatus(!addToCartstatus);
+    !addToCartstatus
+      ? dispatch(addToCart(props.data))
+      : dispatch(deleteFromCart(props.data));
+  }
+
   return (
     <div class="col-sm-3">
       <div class="card cust-card">
-        <div className="heart ">
-          <AiFillHeart
-          className="favourite"
-            // className={favClick ? "favourite color-red" : "favourite"}
-            size={25}
-            onClick={()=>handleFavClick()}
-          />
+        <div className="heart">
+          {!props.favPage ? (
+            <AiFillHeart
+              className={isInWishlist ? "favourite color-red" : "favourite"}
+              size={25}
+              onClick={handleFav}
+            />
+          ) : (
+            <AiOutlineClose
+              className="remove"
+              size={25}
+              onClick={() => handleFav()}
+            />
+          )}
         </div>
 
         <img
@@ -63,8 +78,11 @@ function Product(props) {
             </div>
           </p>
           <h6>${price}</h6>
-          <div onClick={() => handleAddToCart()} className="btn btn-primary btn-block">
-            <div className="add-to-cart">
+          <div
+            onClick={() => handleAddToCart()}
+            className={!addToCartstatus ? "btn-blue-color" : "btn-red-color"}
+          >
+            <div className="add-to-cart white-color">
               <FaShoppingCart />
               <a>{!addToCartstatus ? "Add to Cart" : "Remove from Cart"}</a>
             </div>
