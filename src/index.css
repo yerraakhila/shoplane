@@ -192,3 +192,23 @@ h3{
     background-color: rgb(246, 244, 240);
     
 }
+.new-class{
+    border: 1px solid rgb(228, 224, 224);
+    padding: 7px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+.cart-adj{
+    display: flex;
+    align-items: center;
+
+}
+.profile-deco{
+    padding: 2px 12px;
+    background-color: #007bff;
+    border-radius: 100%;
+    color: white;
+    font-size: 25px;
+}
+

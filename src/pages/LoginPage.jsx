@@ -3,9 +3,10 @@ import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { saveUser } from "../helper/user";
 
 function LoginPage() {
-  let navigate = useNavigate()
+  let navigate = useNavigate();
   const [requestResponse, setRequestResponse] = useState({
     textMessage: "",
     alertClass: "",
@@ -16,23 +17,19 @@ function LoginPage() {
   };
   function onSubmit(values) {
     axios
-      .post(
-        "https://fakestoreapi.com/auth/login",
-        values
-      )
+      .post("https://fakestoreapi.com/auth/login", values)
       .then(
         (response) => {
           setRequestResponse({
             textMessage: "Login is successful",
             alertClass: "alert alert-success",
           });
-          localStorage.setItem('token',response.data.token);
-          localStorage.setItem('user',JSON.stringify(response.data.user));
-          navigate("/")
+          saveUser(values.username, response.data.token);
+          navigate("/");
         },
         (error) => {
           setRequestResponse({
-            textMessage: "invalid credentials",
+            textMessage: error.response.data,
             alertClass: "alert alert-danger",
           });
         }
@@ -83,7 +80,7 @@ function LoginPage() {
                     <div className="form-group">
                       <label>Password</label>
                       <Field
-                        type="text"
+                        type="text" // Update it to password after testing end to end.
                         name="password"
                         className={
                           formik.touched.password && formik.errors.password

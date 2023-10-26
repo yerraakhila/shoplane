@@ -5,26 +5,34 @@ import { useDispatch } from "react-redux";
 import { addToCart, deleteFromCart} from "../redux/reducers/CartSlice";
 import { AiFillStar } from "react-icons/ai";
 import NavAndSub from './../components/NavAndSub';
+import { useSelector } from "react-redux/es/hooks/useSelector";
 
 
 
 function ProductDetailPage() {
 
-  const [addToCartstatus,setAddToCartstatus] = useState(false)
+  //const [addToCartstatus,setAddToCartstatus] = useState(false)
+  
   const { id } = useParams();
+  console.log(id)
   const [product, setProduct] = useState({});
   useEffect(() => {
     axios
       .get("https://fakestoreapi.com/products/" + id)
       .then((response) => setProduct(response.data))
       .catch((error) => console.log(error));
-  }, []);
-
+  }, [id]);
+  let cartItemsList = useSelector((state) => state.cart.cartItemsList);
+  console.log(cartItemsList)
+  let isInCart = cartItemsList.some((each) => each.id === product.id);
+  console.log(isInCart)
   let dispatch = useDispatch();
-  function handleAddToCart() {
-    setAddToCartstatus(!addToCartstatus)
-    !addToCartstatus ? dispatch(addToCart(product)) : dispatch(deleteFromCart(product))
-    
+  function handleCart() {
+    // setAddToCartstatus(!addToCartstatus)
+    // !addToCartstatus ? dispatch(addToCart(product)) : dispatch(deleteFromCart(product))
+    !isInCart
+      ? dispatch(addToCart(product))
+      : dispatch(deleteFromCart(product));
 
     
   }
@@ -63,10 +71,10 @@ function ProductDetailPage() {
             </div>
             <br></br>
             <button
-              className={!addToCartstatus ? "btn-blue-color white-color for-padding":"btn-red-color white-color for-padding"}
-              onClick={() => handleAddToCart()}
+              className={!isInCart ? "btn-blue-color white-color for-padding":"btn-red-color white-color for-padding"}
+              onClick={handleCart}
             >
-              {!addToCartstatus ? "Add to Cart" : "Remove from Cart"}
+              {!isInCart ? "Add to Cart" : "Remove from Cart"}
             </button>
           </div>
         </div>
