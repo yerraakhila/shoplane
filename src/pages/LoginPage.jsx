@@ -43,6 +43,7 @@ function LoginPage() {
       .min(6, "password must be minimum of 6 characters"),
   });
   return (
+    <div className="login-center">
     <div className="container">
       <div className="row">
         <div className="col-md-3"></div>
@@ -111,6 +112,7 @@ function LoginPage() {
         </div>
         <div className="col-md-3"></div>
       </div>
+    </div>
     </div>
   );
 }

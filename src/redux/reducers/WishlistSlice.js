@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUser } from "../../helper/user";
 
 const initialState = {
   wishlistNum: 0,
@@ -45,6 +46,14 @@ export const WishlistSlice = createSlice({
     }
   }
 });
+
+export const wishlistSelector = (state) => {
+  return state.wishlist.wishlistItems;
+}
+
+export const wishlistNumSelector = (state) => {
+  return state.wishlist.wishlistNum;
+}
 
 // Action creators are generated for each case reducer function
 export const { addToWishlist, deleteFromWishlist } = WishlistSlice.actions;

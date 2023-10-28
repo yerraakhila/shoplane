@@ -211,4 +211,9 @@ h3{
     color: white;
     font-size: 25px;
 }
-
+.login-center{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
