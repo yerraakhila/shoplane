@@ -19,15 +19,16 @@ function RegisterPage() {
   function onSubmit(values) {
     axios
       .post(
-        "https://orca-app-jhg4l.ondigitalocean.app/api/auth/register",
+        "https://fakestoreapi.com/users",
         values
       )
       .then(
         (response) => {
           setResponseRequest({
-            textMessage: "Your account is created. Click 'here' at bottom to login",
+            textMessage: "Registration is successful. Click 'here' at bottom to login",
             alertClass: "alert alert-success",
           });
+          console.log(response.status)
         },
         (error) => {
           setResponseRequest({

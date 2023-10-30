@@ -1,18 +1,17 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useEffect, useState } from "react";
 import { clearUser, getUser } from "../helper/user";
 import { CgProfile } from "react-icons/cg";
+import { currUserCartItemsNum } from "../redux/reducers/CartSlice";
 
 function Navbar() {
   const navigate = useNavigate();
-  let numitemsInCart = useSelector((state) => state.cart.cartItemsNum);
+  let numitemsInCart = useSelector(currUserCartItemsNum);
   let loginStatus = getUser() ? true : false;
   function handleLogout() {
     clearUser();
   }
-  // let userLetter = getUser().charAt(0);
   return (
     <div className="header">
       <div className="spans">
@@ -72,8 +71,8 @@ function Navbar() {
             </div>
           )}
         </div>
-        <div className="cart-and-num">
-          <AiOutlineShoppingCart size={40} onClick={() => navigate("/cart")} />
+        <div className="cart-and-num" onClick={() => navigate("/cart")}>
+          <AiOutlineShoppingCart size={40}  />
           <button className="small">{numitemsInCart}</button>
         </div>
       </div>

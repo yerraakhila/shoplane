@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 
 function OrderSummary() {
-  let itemsInCart = useSelector((state)=>state.cart.cartItemsList)
+  let itemsInCart = useSelector(currUserCartItemsList);
   function sum(){
     let totalSum = 0;
     for(let i=0;i<itemsInCart.length;i++){

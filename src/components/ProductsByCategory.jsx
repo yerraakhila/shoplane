@@ -14,7 +14,6 @@ function ProductsByCategory(){
       .then((Response) => setProductsCat(Response.data))
       .catch((error) => console.log(error));
   }, [api]);
-//   console.log(productsCat)
   return (
     <>
     <NavAndSub/>

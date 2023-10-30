@@ -1,4 +1,3 @@
-
 import { AiFillHeart, AiFillStar, AiOutlineClose } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -9,10 +8,12 @@ import {
   deleteFromWishlist,
 } from "../redux/reducers/WishlistSlice";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { currUserCartItemsList } from "../redux/reducers/CartSlice";
+import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 
 function Product(props) {
-  let wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
-  let cartItemsList = useSelector((state) => state.cart.cartItemsList);
+  let wishlistItems = useSelector(currUserWishlistItemsList);
+  let cartItemsList = useSelector(currUserCartItemsList);
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -32,9 +33,18 @@ function Product(props) {
   }
 
   function handleCart() {
-    !isInCart
-      ? dispatch(addToCart(props.data))
-      : dispatch(deleteFromCart(props.data));
+    if(props.favPage){
+      dispatch(addToCart(props.data));
+      dispatch(deleteFromWishlist(props.data));
+    }
+    else{
+      if(!isInCart){
+        dispatch(addToCart(props.data));
+      }
+      else{
+        dispatch(deleteFromCart(props.data));
+      }
+    }
   }
 
   return (
@@ -79,12 +89,26 @@ function Product(props) {
           </p>
           <h6>${price}</h6>
           <div
-            onClick={() => handleCart()}
-            className={!isInCart ? "btn-blue-color" : "btn-red-color"}
+            onClick={handleCart}
+            className={
+              props.favPage
+                ? "btn-green-color"
+                : !isInCart
+                ? "btn-blue-color"
+                : "btn-red-color"
+            }
           >
             <div className="add-to-cart white-color">
               <FaShoppingCart />
-              <a>{!isInCart ? "Add to Cart" : "Remove from Cart"}</a>
+              <a>
+                {!isInCart
+                  ? !props.favPage
+                    ? "Add to Cart"
+                    : "Move to Cart"
+                  : !props.favPage
+                  ? "Remove from Cart"
+                  : "Move to Cart"}
+              </a>
             </div>
           </div>
         </div>

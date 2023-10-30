@@ -35,11 +35,7 @@ function Subcategories() {
         </li>
         {subcategories.map((subcategory) => (
           <li class="nav-item" onClick={(e)=>handleClick(e,subcategory)} key={subcategory} >
-            {/* <a class="nav-link active" href="#" style={{
-            color:"black"
-          }}> */}
               {subcategory}
-            {/* </a> */}
           </li>
         ))}
       </ul>

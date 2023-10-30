@@ -6,13 +6,11 @@ import { addToCart, deleteFromCart} from "../redux/reducers/CartSlice";
 import { AiFillStar } from "react-icons/ai";
 import NavAndSub from './../components/NavAndSub';
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 
 
 
 function ProductDetailPage() {
-
-  //const [addToCartstatus,setAddToCartstatus] = useState(false)
-  
   const { id } = useParams();
   console.log(id)
   const [product, setProduct] = useState({});
@@ -22,20 +20,16 @@ function ProductDetailPage() {
       .then((response) => setProduct(response.data))
       .catch((error) => console.log(error));
   }, [id]);
-  let cartItemsList = useSelector((state) => state.cart.cartItemsList);
+  let cartItemsList = useSelector(currUserCartItemsList);
   console.log(cartItemsList)
   let isInCart = cartItemsList.some((each) => each.id === product.id);
   console.log(isInCart)
   let dispatch = useDispatch();
   function handleCart() {
-    // setAddToCartstatus(!addToCartstatus)
-    // !addToCartstatus ? dispatch(addToCart(product)) : dispatch(deleteFromCart(product))
     !isInCart
       ? dispatch(addToCart(product))
       : dispatch(deleteFromCart(product));
-
-    
-  }
+    }
   
   if (!product) return null;
 
@@ -44,7 +38,6 @@ function ProductDetailPage() {
   return (
     <>
     <NavAndSub/>
-    
     <div className="container">
       <div className="wrapper">
         <div className="row">

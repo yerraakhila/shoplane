@@ -1,8 +1,9 @@
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 
 function CartItems() {
-  let itemsInCart = useSelector((state) => state.cart.cartItemsList);
+  let itemsInCart = useSelector(currUserCartItemsList);
   return (
     
     <div className="outer-row">

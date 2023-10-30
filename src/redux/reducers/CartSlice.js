@@ -1,67 +1,91 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { getUser } from "../../helper/user"
+
 
 const initialState = {
-  cartItemsNum: 0,
-  cartItemsList: [],
-};
-
+    cartWithUserInfo: []
+}
 export const CartSlice = createSlice({
-  name: 'cart',
-  initialState,
-  reducers: {
-    addToCart:(state, action) =>{
-      if (state.cartItemsNum === 0) {
-        let item = {
-          ...action.payload,
-          quantity: 1
-        };
-        state.cartItemsList.push(item);
-      } 
-      else {
-        let check = false;
-        state.cartItemsList.map((item, index) => {
-          if (item.id === action.payload.id) {
-            state.cartItemsList[index].quantity++;
-            check = true;
-          }
-        });
-        if (check === false) {
-          let item = {
-            ...action.payload,
-            quantity: 1,
-          };
-          state.cartItemsList.push(item);
-        }
-      }
-      state.cartItemsNum+=1
-    },
+    name: 'cart',
+    initialState,
+    reducers: {
+        addToCart: (state, action) => {
+            let currentUser = getUser()
+            let obj = state.cartWithUserInfo.find((o) => o.user === currentUser)
+            if (obj) {
+                let cartItem = obj.cartInfo.cartItemsList.find((o) => o.id === action.payload.id)
+                if (cartItem) {
+                    cartItem.quantity++;
+                }
+                else {
+                    let item = {
+                        ...action.payload,
+                        quantity: 1
+                    }
+                    obj.cartInfo.cartItemsList.push(item)
+                }
+                obj.cartInfo.cartItemsNum++
+            }
+            else {
 
-    deleteFromCart(state, action){
-      state.cartItemsList.map((item, index) => {
-        if (item.id === action.payload.id) {
-          state.cartItemsNum-=item.quantity
-          state.cartItemsList.splice(index, 1)
+                let item = {
+                    ...action.payload,
+                    quantity: 1
+                }
+                let obj = {
+                    user: currentUser,
+                    cartInfo: {
+                        cartItemsNum: 1,
+                        cartItemsList: [item]
+                    }
+                }
+                state.cartWithUserInfo.push(obj)
+            }
+        },
+
+        deleteFromCart(state, action) {
+            let currentUser = getUser()
+            let obj = state.cartWithUserInfo.find((o) => o.user === currentUser)
+            if (obj) {
+                let index = obj.cartInfo.cartItemsList.findIndex(item => item.id === action.payload.id)
+                let itemQuantity = obj.cartInfo.cartItemsList[index].quantity
+                obj.cartInfo.cartItemsList.splice(index, 1)
+                obj.cartInfo.cartItemsNum -= itemQuantity
+            }
+        },
+        decrementFromCart(state, action) {
+            let currentUser = getUser()
+            let obj = state.cartWithUserInfo.find((o) => o.user === currentUser)
+            if (obj) {
+                let index = obj.cartInfo.cartItemsList.findIndex(item => item.id === action.payload.id)
+                if (action.payload.quantity > 1) {
+                    obj.cartInfo.cartItemsList[index].quantity--
+                }
+                else {
+                    obj.cartInfo.cartItemsList.splice(index, 1)
+                }
+                obj.cartInfo.cartItemsNum--
+            }
         }
-      })
-      
-    },
-    decrementFromCart(state, action){
-      state.cartItemsList.map((item, index) => {
-        if (item.id === action.payload.id) {
-          if(item.quantity>1){
-            state.cartItemsList[index].quantity--
-          }
-          else{
-            state.cartItemsList.splice(index, 1)
-          }
-          state.cartItemsNum-=1
-        }
-      })
     }
-  }
 });
 
-// Action creators are generated for each case reducer function
-export const { addToCart, deleteFromCart, decrementFromCart} = CartSlice.actions;
+export const currUserCartItemsNum = state => {
+    let currentUser = getUser();
+    let obj = state.cart.cartWithUserInfo.find((o) => o.user === currentUser)
+    if (obj) {
+        return obj.cartInfo.cartItemsNum
+    }
+    return 0
+}
+export function currUserCartItemsList(state) {
+    let currentUser = getUser();
+    let obj = state.cart.cartWithUserInfo.find((o) => o.user === currentUser)
+    if (obj) {
+        return obj.cartInfo.cartItemsList
+    }
+    return []
+}
+export const { addToCart, deleteFromCart, decrementFromCart } = CartSlice.actions;
 
 export default CartSlice.reducer;
