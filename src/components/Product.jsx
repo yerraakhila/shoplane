@@ -33,15 +33,13 @@ function Product(props) {
   }
 
   function handleCart() {
-    if(props.favPage){
+    if (props.favPage) {
       dispatch(addToCart(props.data));
       dispatch(deleteFromWishlist(props.data));
-    }
-    else{
-      if(!isInCart){
+    } else {
+      if (!isInCart) {
         dispatch(addToCart(props.data));
-      }
-      else{
+      } else {
         dispatch(deleteFromCart(props.data));
       }
     }
@@ -101,13 +99,18 @@ function Product(props) {
             <div className="add-to-cart white-color">
               <FaShoppingCart />
               <a>
-                {!isInCart
+                {props.favPage
+                  ? "Move to Cart"
+                  : !isInCart
+                  ? "Add to Cart"
+                  : "Remove from Cart"}
+                {/* {!isInCart
                   ? !props.favPage
                     ? "Add to Cart"
                     : "Move to Cart"
                   : !props.favPage
                   ? "Remove from Cart"
-                  : "Move to Cart"}
+                  : "Move to Cart"} */}
               </a>
             </div>
           </div>

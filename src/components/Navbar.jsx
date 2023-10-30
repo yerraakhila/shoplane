@@ -14,7 +14,7 @@ function Navbar() {
   }
   return (
     <div className="header">
-      <div className="spans">
+      <div className="spans" onClick={()=>navigate('/')}>
         <span className="blue">SHOP</span>
         <span>LANE</span>
       </div>

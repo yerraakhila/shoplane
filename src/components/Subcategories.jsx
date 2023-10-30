@@ -30,7 +30,7 @@ function Subcategories() {
           padding: "0px 200px",
         }}
       >
-        <li class="nav-item" style={{color:"blue"}}onClick={()=>navigate('/')}>
+        <li class="nav-item" style={{color:"blue"}} onClick={()=>navigate('/')}>
           All
         </li>
         {subcategories.map((subcategory) => (
