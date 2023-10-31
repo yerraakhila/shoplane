@@ -1,6 +1,4 @@
-body{
-    background-color: #d73838;
-}
+
 .wrapper{
     background-color: #fff;
     padding: 40px ;
@@ -9,13 +7,17 @@ body{
     border: 2px solid gray;
 }
 .cust-row{
-    padding:0px 50px;
-    width: 100%;
+    /* padding:0px 50px;
+    width: 100%; */
+    
+
 }
 .cust-card{
     margin-top: 30px;
 }
-
+.nav-item.selected  {
+    color: rgb(247, 195, 7);
+}
 .cust-card2{
    
     margin-top: 20px;
@@ -61,6 +63,15 @@ body{
 .checked{
     color: orange;
 }
+.green{
+    color: green;
+}
+.orange{
+    color: orange;
+}
+.red{
+    color: red;
+}
 .login-cart-div{
     display: flex;
     gap: 10px;
@@ -73,6 +84,9 @@ body{
 }
 .spans{
     font-size: 35px;
+}
+.spans :hover{
+    cursor: pointer;
 }
 .blue{
     color: rgb(8, 149, 237);
@@ -230,7 +244,13 @@ h3{
     background-color: rgb(246, 244, 240);
     border-radius: 100%;
     padding: 3px;
-    
+}
+.remove:hover{
+    background-color: rgb(238, 184, 176);
+    cursor: pointer;
+}
+:heart2:hover{
+    cursor: pointer;
 }
 .new-class{
     padding:2px 5px;
@@ -296,6 +316,7 @@ h3{
 }
 .for-hover:hover{
     background-color: rgb(234, 238, 218);
+    cursor: pointer;
 }
 .for-delete{
     background-color: rgb(230, 226, 221);
@@ -305,7 +326,7 @@ h3{
 }
 .for-delete:hover{
     background-color: rgb(238, 184, 176);
-   
+    cursor: pointer;
 }
 .small2{
     background-color: red;
@@ -322,13 +343,12 @@ h3{
     color: red;
 }
 .prods{
-    padding-top:100px ;
-    
+    padding-top:90px ;
 }
 .five-items{
     display: flex;
     width: 20%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .card-replace{
     display: flex;
@@ -419,4 +439,15 @@ h3{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.hover:hover{
+    cursor: pointer;
+}
+.white-color:hover{
+    cursor: pointer;
+}
+@media  only screen and (max-width: 1400px) {
+    ul{
+        display: none;
+    }
 }

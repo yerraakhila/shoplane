@@ -1,12 +1,13 @@
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function Subcategories() {
   const [subcategories, setsubcategories] = useState([]);
   let navigate = useNavigate();
+
   function handleClick(e,subcategory){
     e.preventDefault();
     navigate('/subcategory/'+subcategory)

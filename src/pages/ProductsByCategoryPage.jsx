@@ -11,7 +11,7 @@ import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 
 function ProductsByCategory() {
-  const { api } = useParams();
+  const { categoryId } = useParams();
   const [productsCat, setProductsCat] = useState([]);
   let wishlistItems = useSelector(currUserWishlistItemsList);
   let cartItemsList = useSelector(currUserCartItemsList);
@@ -19,35 +19,21 @@ function ProductsByCategory() {
   let wishlistIdSet = new Set(wishlistItems.map((item) => item.id));
   let cartItemsIdSet = new Set(cartItemsList.map((item) => item.id));
 
-  
-  //   let location = useLocation();
-  // let arrayOfSubs = [
-  //   "/subcategory/electronics",
-  //   "/subcategory/jewelery",
-  //   "/subcategory/men's%20clothing",
-  //   "/subcategory/women's%20clothing",
-  // ];
-
-  // if (arrayOfSubs.includes(location.pathname)) {
-  //   console.log(document.querySelector(".for-color"))
-  //   document.querySelector(".for-color").style.color = "pink";
-  // }
-  
-  
-
   useEffect(() => {
     axios
-      .get("https://fakestoreapi.com/products/category/" + api)
+      .get("https://fakestoreapi.com/products/category/" + categoryId)
       .then((Response) => setProductsCat(Response.data))
       .catch((error) => console.log(error));
-      
-  }, [api]);
+  }, [categoryId]);
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#f7f0f0" }}>
-      <NavbarWithSubcat />
+      <NavbarWithSubcat categoryId={categoryId} />
       <div className="prods">
-        <div className="row cust-row">
+        <div
+          style={{ margin: "25px", marginBottom: "0px" }}
+          className="row cust-row"
+        >
           {productsCat.map((product) => (
             <NewProduct
               data={product}

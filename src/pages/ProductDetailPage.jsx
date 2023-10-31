@@ -58,22 +58,60 @@ function ProductDetailPage() {
             </div>
             
             <div className="spacing">
+            {product.rating.rate < 2.5 &&
             <div className="rating">
+              <AiFillStar  size={30} className={product.rating.rate > 0   ? "red" : ""} />
+              <AiFillStar  size={30} className={product.rating.rate < 2.5 && product.rating.rate >= 1.5 ? "red" : ""} />
+              <AiFillStar  size={30} className="" />
+              <AiFillStar  size={30} className="" />
+              <AiFillStar  size={30} className="" />
+              <span style={{fontSize:"20px"}}>({product.rating.count})</span>
+            </div>}
+            {product.rating.rate > 2.5 && product.rating.rate < 4  &&
+            <div className="rating">
+              <AiFillStar  size={30} className="orange" />
+              <AiFillStar  size={30} className="orange" />
+              <AiFillStar  size={30} className="orange"/>
+              <AiFillStar  size={30} className={product.rating.rate >= 3.5 ? "orange" : ""} />
+              <AiFillStar  size={30} className="" />
+              <span style={{fontSize:"20px"}}>({product.rating.count})</span>
+            </div>}
+            { product.rating.rate >= 4 &&
+            <div className="rating">
+              <AiFillStar  size={30} className="green" />
+              <AiFillStar  size={30} className="green" />
+              <AiFillStar  size={30} className="green" />
+              <AiFillStar  size={30} className="green" />
+              <AiFillStar  size={30} className={product.rating.rate >= 4.5 ? "green" : ""} />
+              <span style={{fontSize:"20px"}}>({product.rating.count})</span>
+            </div>}
+            {/* <div className="rating">
               <AiFillStar  size={30} className={product.rating.rate > 0.5 ? "checked" : ""} />
               <AiFillStar  size={30} className={product.rating.rate > 1.5 ? "checked" : ""} />
               <AiFillStar  size={30} className={product.rating.rate > 2.5 ? "checked" : ""} />
               <AiFillStar  size={30} className={product.rating.rate > 3.5 ? "checked" : ""} />
-              <AiFillStar  size={30} className={product.rating.rate > 4.5 ? "checked" : ""} />
+              <AiFillStar  size={30} className={product.rating.rate > 4.5 ? "grecheckeden" : ""} />
               <span style={{fontSize:"20px"}}>({product.rating.count})</span>
-            </div>
-            <h5>size:s</h5>
+            </div> */}
+            {product.category === "electronics" ?
+             <h5 style={{color:"brown"}}>Size: Onesize</h5> :
+             
+             <h5 style={{color:"brown"}}>Size: S</h5>}
+              
+            
+            
+            {product.category === "jewelery" ? 
             <div className="discount-again">
               <h2 style={{margin:"0px",padding:"0px"}}>${(product.price*0.7).toFixed(2)}</h2>
               <del ><h4 style={{color:"red",margin:"0px"}}>${(product.price).toFixed(2)}</h4></del>
               <h4 style={{fontWeight:"400",color:"brown",margin:"0px"}}>(30% off)</h4>
 
-            </div>
-            
+            </div>:
+            <h2 style={{margin:"0px",padding:"0px"}}>${product.price}</h2>
+}             {product.category === "women's clothing" ?
+            <p style={{margin:"0px",color:"green"}} >express delivery in 2 days</p> :
+            <p style={{margin:"0px",color:"#f5429e"}} >delivery will be on 5 Nov 2023</p>
+          }
             
             <button 
               className={!isInCart ? "btn-blue-color white-color for-padding":"btn-red-color white-color for-padding"}

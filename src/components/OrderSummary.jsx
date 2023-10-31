@@ -10,15 +10,24 @@ function OrderSummary() {
     }
     return totalSum;
   }
+  function findDiscount(){
+    let totalDiscount = 0;
+    for(let i=0;i<itemsInCart.length;i++){
+      if(itemsInCart[i].category === "jewelery"){
+        console.log("hi")
+        totalDiscount += ((itemsInCart[i].quantity)*(itemsInCart[i].price)*0.3)
+      }
+    }
+  return totalDiscount;
+  }
   let subTotal = sum();
   let shopping = 0;
   let tax = 0;
-  let discount = 0
+  let discount = findDiscount()
   let delivery = 0;
   if(subTotal>0){
     shopping = 0.05*subTotal
     tax = 0.1*subTotal
-    discount = 0.3*subTotal
     delivery = 10
   }
   let total=subTotal-discount+shopping+tax;
@@ -31,7 +40,7 @@ function OrderSummary() {
         <h5 className="htag">${subTotal.toFixed(2)}</h5>
       </div>
       <div className="order-summary-gap">
-        <h5 className="htag">Discount (30%)</h5>
+        <h5 className="htag">Discount</h5>
         <h5 className="htag">- ${discount.toFixed(2)}</h5>
       </div>
       <div className="order-summary-gap">

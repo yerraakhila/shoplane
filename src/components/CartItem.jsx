@@ -5,7 +5,7 @@ import { addToCart } from "../redux/reducers/CartSlice";
 import { useNavigate } from "react-router-dom";
 
 function CartItem(props) {
-  const { image, title, price,quantity,id} = props.data;
+  const { image, title, price,quantity,id,category} = props.data;
   let navigate = useNavigate();
   let dispatch = useDispatch();
   function handleClick(e) {
@@ -25,7 +25,7 @@ function CartItem(props) {
   return (
     <div className="cart-img-details" style={{backgroundColor:"#fff"}}>
       <div className="without-del">
-        <div className="cart-img" >
+        <div className="cart-img hover" >
           <img src={image} width={200} height={200} onClick={handleClick} />
         </div>
         <div className="details">
@@ -39,13 +39,20 @@ function CartItem(props) {
             <button className="numberDisplay common">{quantity}</button>
             <button className="symbol common" onClick={handleIncrement}>+</button>
           </div>
+          {
+            category === "jewelery" ?
+            <div className="discount">
+            <h4 style={{margin:"0px"}}>${(price*quantity*0.7).toFixed(2)}</h4>
+            <del><h6 style={{margin:"0px"}} className="original-price">${(price*quantity).toFixed(2)}</h6></del>
+            <h6 style={{margin:"0px",color:"brown",fontWeight:"400"}}>(30% off)</h6>
+            </div> :
+            <h4 style={{margin:"0px",marginTop:"5px"}}>${price*quantity}</h4>
+          }
           
-          <div className="discount">
-          <h4 style={{margin:"0px"}}>${(price*quantity*0.7).toFixed(2)}</h4>
-          <del><h6 style={{margin:"0px"}} className="original-price">${(price*quantity).toFixed(2)}</h6></del>
-          <h6 style={{margin:"0px",color:"brown",fontWeight:"400"}}>(30% off)</h6>
-          </div>
-          <p style={{margin:"0px",color:"green"}} >express delivery in 2 days</p>
+          {category === "women's clothing" ?
+            <p style={{margin:"0px",color:"green"}} >express delivery in 2 days</p> :
+            <p style={{margin:"0px",color:"#f5429e"}} >delivery will be on 5 Nov 2023</p>
+          }
           </div>
           
         </div>

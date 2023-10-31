@@ -1,4 +1,9 @@
-import { AiOutlineHeart, AiFillStar, AiFillHeart, AiOutlineClose } from "react-icons/ai";
+import {
+  AiOutlineHeart,
+  AiFillStar,
+  AiFillHeart,
+  AiOutlineClose,
+} from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -14,12 +19,13 @@ function NewProduct(props) {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
-  const { image, rating, price, title, id } = props.data;
+  const { image, rating, price, title, id, category } = props.data;
+  console.log();
   function handleClick(e) {
     e.preventDefault();
     navigate("/productDetailPage/" + id);
   }
-  function handleDeleteFromWishlist(){
+  function handleDeleteFromWishlist() {
     dispatch(deleteFromWishlist(props.data));
   }
   function handleFav() {
@@ -42,15 +48,14 @@ function NewProduct(props) {
   }
   return (
     <div class="five-items">
-      
       <div className="card-replace">
         <div className="for-relative">
-          <div className="img-background">
-            <img src={image} width={180} height={200} onClick={handleClick}/>
+          <div className="img-background hover">
+            <img src={image} width={180} height={200} onClick={handleClick} />
           </div>
           {!props.favPage ? (
             <AiFillHeart
-              className={isInWishlist ? "color-red heart2" : "heart2"}
+              className={isInWishlist ? "color-red hover heart2 " : "hover heart2"}
               size={25}
               onClick={handleFav}
             />
@@ -61,28 +66,68 @@ function NewProduct(props) {
               onClick={handleDeleteFromWishlist}
             />
           )}
-          
         </div>
         <div className="without-product-image">
-          <h6 className="ellipsis" style={{padding:"0px",margin:"0px",marginTop:"10px"}}>{title}</h6>
+          <h6
+            className="ellipsis"
+            style={{ padding: "0px", margin: "0px", marginTop: "10px" }}
+          >
+            {title}
+          </h6>
           <div className="p-side-side">
-          
-          <div className="style-star">
-          <p style={{padding:"0px",margin:"0px"}}>{rating.rate}</p>
-          <AiFillStar className="checked"/>
-          <p style={{padding:"0px",margin:"0px"}}>({rating.count})</p>
-          </div>
-          <div className="cost">
-            <div className="price">
-            <p style={{padding:"0px",margin:"0px",fontWeight:"500",fontSize:"17px"}}>${(price*0.9).toFixed(2)}</p>
-          <del style={{padding:"0px",margin:"0px",fontSize:"13px",color:"gray"}}>${price}</del>
+            <div className="style-star">
+      
+              <p style={{ padding: "0px", margin: "0px" }}>{rating.rate}</p>
+               {rating.rate >= 4 && <AiFillStar className="green" />}
+               {(rating.rate >= 2.5 && rating.rate < 4)  && <AiFillStar className="orange" />}
+               {rating.rate < 2.5 && <AiFillStar className="red" />}
+              
+              <p style={{ padding: "0px", margin: "0px", marginLeft:"5px" }}>({rating.count})</p>
             </div>
-          
-          <p style={{padding:"0px",margin:"0px",fontSize:"13px"}}>(30% off)</p>
+            {category === "jewelery" ? 
+            <div className="cost">
+              
+              <div className="price">
+                <p
+                  style={{
+                    padding: "0px",
+                    margin: "0px",
+                    fontWeight: "500",
+                    fontSize: "17px",
+                  }}
+                >
+                  ${(price * 0.7).toFixed(2)}
+                </p>
+
+                <del
+                  style={{
+                    padding: "0px",
+                    margin: "0px",
+                    fontSize: "13px",
+                    color: "gray",
+                  }}
+                >
+                  ${price}
+                </del>
+              </div>
+
+              <p style={{ padding: "0px", margin: "0px", fontSize: "13px" }}>
+                (30% off)
+              </p>
+            </div>
+            : 
+            <p
+                  style={{
+                    padding: "0px",
+                    margin: "0px",
+                    fontWeight: "500",
+                    fontSize: "17px",
+                  }}
+                >
+                  ${(price)}
+                </p>}
           </div>
-          
-          </div>
-          
+
           <div
             onClick={handleCart}
             className={

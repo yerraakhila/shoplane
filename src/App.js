@@ -16,17 +16,17 @@ import NavbarWithSubcat from './components/NavbarWithSubcat';
 function App() {
   return (
     <BrowserRouter>
-    
+
       <Routes>
-        
+
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/" element={<HomePage />} />
         <Route path='/productDetailPage/:id' element={<ProductDetailPage />} />
-        <Route path='/subcategory/:api' element={<ProductsByCategory />} />
+        <Route path='/subcategory/:categoryId' element={<ProductsByCategory />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
-        <Route path='/navbarWithSubcat' element={<NavbarWithSubcat/>}/>
+        <Route path='/navbarWithSubcat' element={<NavbarWithSubcat />} />
       </Routes>
     </BrowserRouter>
   );
