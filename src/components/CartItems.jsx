@@ -1,7 +1,7 @@
 import CartItem from "./CartItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { currUserCartItemsList } from "../redux/reducers/CartSlice";
-
+import { Link } from "react-router-dom";
 function CartItems() {
   let itemsInCart = useSelector(currUserCartItemsList);
   return (
@@ -15,6 +15,8 @@ function CartItems() {
 
       {!itemsInCart.length && <div className="empty">
         <h2>Your Cart is Empty</h2>
+        <br />
+        <h5 style={{color:"black"}}>(Add items from <Link to="/wishlist">Wishlist</Link>)</h5>
         </div>}
       
     </div>

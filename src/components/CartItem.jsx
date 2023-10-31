@@ -23,9 +23,9 @@ function CartItem(props) {
     dispatch(decrementFromCart(props.data));
   }
   return (
-    <div className="cart-img-details">
+    <div className="cart-img-details" style={{backgroundColor:"#fff"}}>
       <div className="without-del">
-        <div className="cart-img">
+        <div className="cart-img" >
           <img src={image} width={200} height={200} onClick={handleClick} />
         </div>
         <div className="details">
@@ -33,15 +33,29 @@ function CartItem(props) {
             <h5>Brand</h5>
             <p>{title}</p>
           </div>
+          <div>
           <div className="buttons">
             <button className="symbol common" onClick={handleDecrement}>-</button>
             <button className="numberDisplay common">{quantity}</button>
             <button className="symbol common" onClick={handleIncrement}>+</button>
           </div>
-          <h4>${price*quantity}</h4>
+          
+          <div className="discount">
+          <h4 style={{margin:"0px"}}>${(price*quantity*0.7).toFixed(2)}</h4>
+          <del><h6 style={{margin:"0px"}} className="original-price">${(price*quantity).toFixed(2)}</h6></del>
+          <h6 style={{margin:"0px",color:"brown",fontWeight:"400"}}>(30% off)</h6>
+          </div>
+          <p style={{margin:"0px",color:"green"}} >express delivery in 2 days</p>
+          </div>
+          
         </div>
       </div>
-      <RiDeleteBin5Line size={20} onClick={handleDelete} />
+      <div >
+      <RiDeleteBin5Line size={30} 
+      className="for-delete"
+      onClick={handleDelete} />
+      </div>
+      
     </div>
   );
 }

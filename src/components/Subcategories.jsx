@@ -34,7 +34,7 @@ function Subcategories() {
           All
         </li>
         {subcategories.map((subcategory) => (
-          <li class="nav-item" onClick={(e)=>handleClick(e,subcategory)} key={subcategory} >
+          <li class="nav-item for-color" onClick={(e)=>handleClick(e,subcategory)} key={subcategory} >
               {subcategory}
           </li>
         ))}

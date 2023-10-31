@@ -43,7 +43,7 @@ function LoginPage() {
       .min(6, "password must be minimum of 6 characters"),
   });
   return (
-    <div className="login-center">
+    <div className="login-center" style={{backgroundColor:"#f7f0f0"}}>
     <div className="container">
       <div className="row">
         <div className="col-md-3"></div>
@@ -52,8 +52,8 @@ function LoginPage() {
             <div class={requestResponse.alertClass} role="alert">
               {requestResponse.textMessage}
             </div>
-            <h2>Login</h2>
-            <hr />
+            <h2 >Login</h2>
+            <hr style={{marginBottom:"30px"}}/>
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -64,7 +64,7 @@ function LoginPage() {
                 return (
                   <Form>
                     <div className="form-group">
-                      <label>Username</label>
+                      <label style={{fontWeight:"600"}}>Username:</label>
                       <Field
                         type="text"
                         name="username"
@@ -73,13 +73,14 @@ function LoginPage() {
                             ? "form-control is-invalid"
                             : "form-control"
                         }
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="username" />
                       </small>
                     </div>
                     <div className="form-group">
-                      <label>Password</label>
+                      <label style={{fontWeight:"600"}}>Password</label>
                       <Field
                         type="text" // Update it to password after testing end to end.
                         name="password"
@@ -88,6 +89,7 @@ function LoginPage() {
                             ? "form-control is-invalid"
                             : "form-control"
                         }
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="password" />
@@ -103,6 +105,7 @@ function LoginPage() {
                       value="Login"
                       className="btn btn-primary btn-block"
                       disabled={!formik.isValid}
+                      
                     />
                   </Form>
                 );

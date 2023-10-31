@@ -3,6 +3,7 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import NavbarWithSubcat from "../components/NavbarWithSubcat";
 
 function RegisterPage() {
   const initialValues = {
@@ -49,20 +50,20 @@ function RegisterPage() {
       .min(6, "password must be minimum of 6 characters"),
   });
   return (
-    <div className="login-center">
-
     
-    <div className="container">
-      <div className="row">
+    <div className="login-center" style={{backgroundColor:"#f7f0f0"}}>
+    
+    <div className="container" >
+      <div className="row" >
         <div className="col-md-3"></div>
         <div className="col-md-6">
-          <div className="wrapper">
+          <div className="wrapper" >
     
           <div class={responseRequest.alertClass} role="alert">
               {responseRequest.textMessage}
             </div>
           
-            <h2>Sign up</h2>
+            <h2 style={{marginBottom:"30px"}}>Sign up</h2>
             <hr />
             <Formik
               initialValues={initialValues}
@@ -74,55 +75,60 @@ function RegisterPage() {
                 return (
                   <Form>
                     <div className="form-group">
-                      <label>First Name</label>
+                      <label style={{fontWeight:"600"}}>First Name</label>
                       <Field
                         name="firstName"
                         className={formik.touched.firstName && formik.errors.firstName ? "form-control is-invalid" : "form-control"}
                         type="text"
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="firstName" />
                       </small>
                     </div>
                     <div className="form-group">
-                      <label>Last Name</label>
+                      <label style={{fontWeight:"600"}}>Last Name</label>
                       <Field
                         name="lastName"
                         className={formik.touched.lastName && formik.errors.lastName ? "form-control is-invalid" : "form-control"}
                         type="text"
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="lastName" />
                       </small>
                     </div>
                     <div className="form-group">
-                      <label>Email</label>
+                      <label style={{fontWeight:"600"}}>Email</label>
                       <Field
                         name="email"
                         className={formik.touched.email && formik.errors.email ? "form-control is-invalid" : "form-control"}
                         type="text"
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="email" />
                       </small>
                     </div>
                     <div className="form-group">
-                      <label>Mobile</label>
+                      <label style={{fontWeight:"600"}}>Mobile</label>
                       <Field
                         name="mobile"
                         className={formik.touched.mobile && formik.errors.mobile ? "form-control is-invalid" : "form-control"}
                         type="text"
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="mobile" />
                       </small>
                     </div>
                     <div className="form-group">
-                      <label>Password</label>
+                      <label style={{fontWeight:"600"}}>Password</label>
                       <Field
                         name="password"
                         className={formik.touched.password && formik.errors.password ? "form-control is-invalid" : "form-control"}
                         type="text"
+                        style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
                         <ErrorMessage name="password" />

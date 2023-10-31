@@ -27,6 +27,7 @@ function Product(props) {
   let isInCart = cartItemsList.some((each) => each.id === id);
 
   function handleFav() {
+    
     !isInWishlist
       ? dispatch(addToWishlist(props.data))
       : dispatch(deleteFromWishlist(props.data));

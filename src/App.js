@@ -6,9 +6,10 @@ import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 
-import ProductsByCategory from './components/ProductsByCategory';
+import ProductsByCategory from './pages/ProductsByCategoryPage';
 import CartPage from './pages/CartPage';
 import WishlistPage from './pages/WishlistPage';
+import NavbarWithSubcat from './components/NavbarWithSubcat';
 
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path='/subcategory/:api' element={<ProductsByCategory />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path='/navbarWithSubcat' element={<NavbarWithSubcat/>}/>
       </Routes>
     </BrowserRouter>
   );

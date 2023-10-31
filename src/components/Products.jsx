@@ -1,10 +1,20 @@
 import { useState } from "react";
 import Product from "./Product";
+import NewProduct from "./NewProduct";
 import axios from "axios";
 import { useEffect } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { currUserCartItemsList } from "../redux/reducers/CartSlice";
+import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 
 function Products() {
   const [products, setProducts] = useState([]);
+  let wishlistItems = useSelector(currUserWishlistItemsList);
+  let cartItemsList = useSelector(currUserCartItemsList);
+
+
+  let wishlistIdSet = new Set(wishlistItems.map(item => item.id));
+  let cartItemsIdSet = new Set(cartItemsList.map(item => item.id));
 
   useEffect(() => {
     axios
@@ -12,11 +22,14 @@ function Products() {
       .then((Response) => setProducts(Response.data))
       .catch((error) => console.log(error));
   }, []);
+
   return (
-    <div>
+    <div className="prods">
       <div className="row cust-row">
         {products.map((product) => (
-          <Product data={product} key={product.id} favPage={false} />
+          
+          <NewProduct data={product} isInWishlist={wishlistIdSet.has(product.id)}
+          isInCart={cartItemsIdSet.has(product.id)} key={product.id} favPage={false} />
         ))}
       </div>
     </div>
