@@ -2,6 +2,7 @@ import CartItem from "./CartItem";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 import { Link } from "react-router-dom";
+
 function CartItems() {
   let itemsInCart = useSelector(currUserCartItemsList);
   return (

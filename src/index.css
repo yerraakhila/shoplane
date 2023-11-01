@@ -405,6 +405,7 @@ h3{
 }
 .cart-page{
     display: flex;
+    justify-content: center;
 }
 .discount{
     display: flex;
@@ -446,8 +447,35 @@ h3{
 .white-color:hover{
     cursor: pointer;
 }
+.proceed{
+    border:none;
+    padding:5px 10px;
+    margin-top: 50px;
+    background-color: rgb(0, 106, 255);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.order-success{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.continue-shopping{
+    font-size: 25px;
+}
+.for-fixed{
+    position: fixed;
+    width: 33.3%;
+}
+
 @media  only screen and (max-width: 1400px) {
     ul{
         display: none;
     }
 }
+

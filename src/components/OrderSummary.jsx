@@ -1,7 +1,9 @@
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { currUserCartItemsList } from "../redux/reducers/CartSlice";
+import { useNavigate } from "react-router-dom";
 
 function OrderSummary() {
+  let navigate = useNavigate()
   let itemsInCart = useSelector(currUserCartItemsList);
   function sum(){
     let totalSum = 0;
@@ -33,6 +35,7 @@ function OrderSummary() {
   let total=subTotal-discount+shopping+tax;
   let orderTotal = total+delivery;
   return (
+    <div className="for-fixed" >
     <div className="order-summary" style={{backgroundColor:"#fff"}}>
       <h3>Order Summary</h3>
       <div className="order-summary-gap">
@@ -66,6 +69,11 @@ function OrderSummary() {
         <h4 className="h4tag">${orderTotal.toFixed(2)}</h4>
       </div>
       
+    </div>
+    <div class="text-center">
+    <button className="proceed" onClick={()=>navigate('/orderSuccess')}>Click here to Pay</button>
+    </div>
+    
     </div>
   );
 }

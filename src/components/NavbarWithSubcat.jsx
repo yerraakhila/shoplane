@@ -108,7 +108,7 @@ function NavbarWithSubcat({ categoryId }) {
           <p style={{ margin: "0px", fontWeight: "600" }}>Wishlist</p>
         </div>
         <div className="icon hover" onClick={() => navigate("/cart")}>
-          <div>
+          <div style={{ position:"relative" }}>
             <AiOutlineShoppingCart size={30} />
             <button className="small2">{numitemsInCart}</button>
           </div>

@@ -31,7 +31,7 @@ function ProductsByCategory() {
       <NavbarWithSubcat categoryId={categoryId} />
       <div className="prods">
         <div
-          style={{ margin: "25px", marginBottom: "0px" }}
+          style={{margin:"0px 25px"}}
           className="row cust-row"
         >
           {productsCat.map((product) => (

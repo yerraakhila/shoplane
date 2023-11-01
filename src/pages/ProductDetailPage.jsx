@@ -52,7 +52,7 @@ function ProductDetailPage() {
             <div className="col-sm-7 gap">
               <div className="spacing">
                 <h4>{product.title}</h4>
-                <p>{product.description.slice(0, 500)}</p>
+                <p>{product.description.slice(0, 300)}</p>
               </div>
 
               <div className="spacing">

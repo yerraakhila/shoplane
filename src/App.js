@@ -10,6 +10,7 @@ import ProductsByCategory from './pages/ProductsByCategoryPage';
 import CartPage from './pages/CartPage';
 import WishlistPage from './pages/WishlistPage';
 import NavbarWithSubcat from './components/NavbarWithSubcat';
+import OrderSuccess from './components/OrderSuccess';
 
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/wishlist" element={<WishlistPage />} />
         <Route path='/navbarWithSubcat' element={<NavbarWithSubcat />} />
+        <Route path='/orderSuccess' element={<OrderSuccess />} />
       </Routes>
     </BrowserRouter>
   );

@@ -25,7 +25,7 @@ function Products() {
 
   return (
     <div className="prods">
-      <div style={{margin:"25px",marginBottom:"0px"}} className="row cust-row">
+      <div style={{margin:"0px 25px"}} className="row cust-row">
         {products.map((product) => (
           
           <NewProduct data={product} isInWishlist={wishlistIdSet.has(product.id)}

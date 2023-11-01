@@ -16,7 +16,7 @@ function WishlistPage() {
     < div style={{ minHeight:"100vh",backgroundColor:"#f7f0f0"}}>
       <NavbarWithSubcat/>
         <div  className="prods">
-        <div style={{margin:"25px",marginBottom:"0px"}} className="row cust-row">
+        <div style={{margin:"0px 25px"}} className="row cust-row">
           
           {itemsInWishlist.map((product) => (
             <NewProduct data={product} key={product.id} favPage={true} />
@@ -26,7 +26,8 @@ function WishlistPage() {
         {!itemsInCart && <div className="for-center">
         <h2>Your wishlist is Empty</h2>
         <br />
-        <h5 style={{color:"black"}}>(30% off on all Products. click <Link to="/">here</Link> to shop)</h5>
+        <h5 style={{color:"black"}}>Click <Link to="/">here</Link> to shop.<h5 style={{color:"green",marginTop:"15px"}}>(30% off on jewellery and express delivery for women's clothing!!!)</h5></h5>
+       
         </div>}
         </div>
         
