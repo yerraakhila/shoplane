@@ -8,10 +8,12 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { currUserCartItemsList } from "../redux/reducers/CartSlice";
 import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 import NavbarWithSubcat from "../components/NavbarWithSubcat";
-import { addToWishlist, deleteFromWishlist } from "../redux/reducers/WishlistSlice";
+import {
+  addToWishlist,
+  deleteFromWishlist,
+} from "../redux/reducers/WishlistSlice";
 
 function ProductDetailPage() {
-  
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
@@ -29,7 +31,7 @@ function ProductDetailPage() {
       : dispatch(deleteFromCart(product));
   }
   let wishlistItems = useSelector(currUserWishlistItemsList);
-  let isInWishlist = wishlistItems.find((item)=>item.id === product.id);
+  let isInWishlist = wishlistItems.find((item) => item.id === product.id);
 
   function handleFav() {
     !isInWishlist
@@ -46,8 +48,8 @@ function ProductDetailPage() {
       <NavbarWithSubcat />
       <div className="container prods centering">
         <div className="wrapper">
-          <div className="row">
-            <div className="col-sm-5 cust-col-sm-6">
+          <div className="row detail-display">
+            <div className="half-again cust-col-sm-6">
               <img
                 src={product.image}
                 alt=""
@@ -56,7 +58,7 @@ function ProductDetailPage() {
                 className="img-fluid"
               />
             </div>
-            <div className="col-sm-7 gap">
+            <div className="half-again gap">
               <div className="spacing">
                 <h4>Brand, {product.title}</h4>
                 <p>{product.description.slice(0, 300)}</p>
@@ -139,6 +141,7 @@ function ProductDetailPage() {
                       </h4>
                     </del>
                     <h4
+                    className="cart-off2"
                       style={{
                         fontWeight: "400",
                         color: "brown",
@@ -162,22 +165,40 @@ function ProductDetailPage() {
                     Estimated delivery on 20 Nov 2023
                   </p>
                 )}
-                <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"30px",width:"100%"}}>
-                  {!isInWishlist ? 
-                  <AiOutlineHeart className="hover" size={60} onClick={handleFav}/>
-                   : <AiFillHeart className="hover red" size={60} onClick={handleFav}/>}
-                  
-                <button
-                style={{width:"100%",margin:"0px"}}
-                  className={
-                    !isInCart
-                      ? "btn-blue-color white-color for-padding"
-                      : "btn-red-color white-color for-padding"
-                  }
-                  onClick={handleCart}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "30px",
+                    width: "100%",
+                  }}
                 >
-                  {!isInCart ? "Add to Cart" : "Remove from Cart"}
-                </button>
+                  {!isInWishlist ? (
+                    <AiOutlineHeart
+                      className="hover"
+                      size={60}
+                      onClick={handleFav}
+                    />
+                  ) : (
+                    <AiFillHeart
+                      className="hover red"
+                      size={60}
+                      onClick={handleFav}
+                    />
+                  )}
+
+                  <button
+                    style={{ width: "100%", margin: "0px" }}
+                    className={
+                      !isInCart
+                        ? "btn-blue-color white-color for-padding"
+                        : "btn-red-color white-color for-padding"
+                    }
+                    onClick={handleCart}
+                  >
+                    {!isInCart ? "Add to Cart" : "Remove from Cart"}
+                  </button>
                 </div>
               </div>
             </div>

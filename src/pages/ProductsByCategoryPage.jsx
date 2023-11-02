@@ -11,6 +11,7 @@ import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 function ProductsByCategory() {
   const { categoryId } = useParams();
   const [productsCat, setProductsCat] = useState([]);
+
   let wishlistItems = useSelector(currUserWishlistItemsList);
   let cartItemsList = useSelector(currUserCartItemsList);
 
@@ -28,10 +29,7 @@ function ProductsByCategory() {
     <div style={{ minHeight: "100vh", backgroundColor: "#f7f0f0" }}>
       <NavbarWithSubcat categoryId={categoryId} />
       <div className="prods">
-        <div
-          style={{margin:"0px 25px"}}
-          className="row cust-row"
-        >
+        <div style={{ padding: "50px 25px 5px 25px", margin:"0px"}} className="row cust-row">
           {productsCat.map((product) => (
             <NewProduct
               data={product}

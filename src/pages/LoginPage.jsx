@@ -43,79 +43,78 @@ function LoginPage() {
       .min(6, "password must be minimum of 6 characters"),
   });
   return (
-    <div className="login-center" style={{backgroundColor:"#f7f0f0"}}>
-    <div className="container">
-      <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6">
-          <div className="wrapper">
-            <div class={requestResponse.alertClass} role="alert">
-              {requestResponse.textMessage}
+    <div className="login-center" style={{ backgroundColor: "#f7f0f0" }}>
+      <div className="container">
+        <div className="row">
+          <div className="one-fourth"></div>
+          <div className="half">
+            <div className="wrapper">
+              <div class={requestResponse.alertClass} role="alert">
+                {requestResponse.textMessage}
+              </div>
+              <h2>Login</h2>
+              <hr style={{ marginBottom: "30px" }} />
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                validateOnMount
+                onSubmit={onSubmit}
+              >
+                {(formik) => {
+                  return (
+                    <Form>
+                      <div className="form-group">
+                        <label style={{ fontWeight: "600" }}>Username:</label>
+                        <Field
+                          type="text"
+                          name="username"
+                          className={
+                            formik.touched.username && formik.errors.username
+                              ? "form-control is-invalid"
+                              : "form-control"
+                          }
+                          style={{ backgroundColor: "#f2f6f7" }}
+                        />
+                        <small className="text-danger">
+                          <ErrorMessage name="username" />
+                        </small>
+                      </div>
+                      <div className="form-group">
+                        <label style={{ fontWeight: "600" }}>Password</label>
+                        <Field
+                          type="password"
+                          name="password"
+                          className={
+                            formik.touched.password && formik.errors.password
+                              ? "form-control is-invalid"
+                              : "form-control"
+                          }
+                          style={{ backgroundColor: "#f2f6f7" }}
+                        />
+                        <small className="text-danger">
+                          <ErrorMessage name="password" />
+                        </small>
+                      </div>
+                      <br />
+                      <p className="text-center">
+                        Don't have an account? Sign up{" "}
+                        <Link to="/signup">here.</Link>
+                      </p>
+                      <Field
+                        type="submit"
+                        value="Login"
+                        className="btn btn-primary btn-block"
+                        disabled={!formik.isValid}
+                      />
+                    </Form>
+                  );
+                }}
+              </Formik>
             </div>
-            <h2 >Login</h2>
-            <hr style={{marginBottom:"30px"}}/>
-            <Formik
-              initialValues={initialValues}
-              validationSchema={validationSchema}
-              validateOnMount
-              onSubmit={onSubmit}
-            >
-              {(formik) => {
-                return (
-                  <Form>
-                    <div className="form-group">
-                      <label style={{fontWeight:"600"}}>Username:</label>
-                      <Field
-                        type="text"
-                        name="username"
-                        className={
-                          formik.touched.username && formik.errors.username
-                            ? "form-control is-invalid"
-                            : "form-control"
-                        }
-                        style={{backgroundColor:"#f2f6f7"}}
-                      />
-                      <small className="text-danger">
-                        <ErrorMessage name="username" />
-                      </small>
-                    </div>
-                    <div className="form-group">
-                      <label style={{fontWeight:"600"}}>Password</label>
-                      <Field
-                        type="password"
-                        name="password"
-                        className={
-                          formik.touched.password && formik.errors.password
-                            ? "form-control is-invalid"
-                            : "form-control"
-                        }
-                        style={{backgroundColor:"#f2f6f7"}}
-                      />
-                      <small className="text-danger">
-                        <ErrorMessage name="password" />
-                      </small>
-                    </div>
-                    <br />
-                    <p className="text-center">
-                      Don't have an account? Sign up{" "}
-                      <Link to="/signup">here.</Link>
-                    </p>
-                    <Field
-                      type="submit"
-                      value="Login"
-                      className="btn btn-primary btn-block"
-                      disabled={!formik.isValid}
-                      
-                    />
-                  </Form>
-                );
-              }}
-            </Formik>
           </div>
+          <div className="one-fourth"></div>
         </div>
-        <div className="col-md-3"></div>
       </div>
-    </div>
     </div>
   );
 }

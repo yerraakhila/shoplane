@@ -1,8 +1,4 @@
-import {
-  AiFillStar,
-  AiFillHeart,
-  AiOutlineClose,
-} from "react-icons/ai";
+import { AiFillStar, AiFillHeart, AiOutlineClose } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -53,7 +49,9 @@ function NewProduct(props) {
           </div>
           {!props.favPage ? (
             <AiFillHeart
-              className={isInWishlist ? "color-red hover heart2 " : "hover heart2"}
+              className={
+                isInWishlist ? "color-red hover heart2" : "hover heart2"
+              }
               size={25}
               onClick={handleFav}
             />
@@ -74,56 +72,59 @@ function NewProduct(props) {
           </h6>
           <div className="p-side-side">
             <div className="style-star">
-      
               <p style={{ padding: "0px", margin: "0px" }}>{rating.rate}</p>
-               {rating.rate >= 4 && <AiFillStar className="green" />}
-               {(rating.rate >= 2.5 && rating.rate < 4)  && <AiFillStar className="orange" />}
-               {rating.rate < 2.5 && <AiFillStar className="red" />}
-              
-              <p style={{ padding: "0px", margin: "0px", marginLeft:"5px" }}>({rating.count})</p>
-            </div>
-            {category === "jewelery" ? 
-            <div className="cost">
-              
-              <div className="price">
-                <p
-                  style={{
-                    padding: "0px",
-                    margin: "0px",
-                    fontWeight: "500",
-                    fontSize: "17px",
-                  }}
-                >
-                  ${(price * 0.7).toFixed(2)}
-                </p>
+              {rating.rate >= 4 && <AiFillStar className="green" />}
+              {rating.rate >= 2.5 && rating.rate < 4 && (
+                <AiFillStar className="orange" />
+              )}
+              {rating.rate < 2.5 && <AiFillStar className="red" />}
 
-                <del
-                  style={{
-                    padding: "0px",
-                    margin: "0px",
-                    fontSize: "13px",
-                    color: "gray",
-                  }}
-                >
-                  ${price}
-                </del>
-              </div>
-
-              <p style={{ padding: "0px", margin: "0px", fontSize: "13px" }}>
-                (30% off)
+              <p style={{ padding: "0px", margin: "0px", marginLeft: "5px" }}>
+                ({rating.count})
               </p>
             </div>
-            : 
-            <p
-                  style={{
-                    padding: "0px",
-                    margin: "0px",
-                    fontWeight: "500",
-                    fontSize: "17px",
-                  }}
-                >
-                  ${(price)}
-                </p>}
+            {category === "jewelery" ? (
+              <div className="cost">
+                <div className="price">
+                  <p
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      fontWeight: "500",
+                      fontSize: "17px",
+                    }}
+                  >
+                    ${(price * 0.7).toFixed(2)}
+                  </p>
+
+                  <del
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      fontSize: "13px",
+                      color: "gray",
+                    }}
+                  >
+                    ${price}
+                  </del>
+                </div>
+
+                <p style={{ padding: "0px", margin: "0px", fontSize: "13px" }}>
+                  (30% off)
+                </p>
+              </div>
+            ) : (
+              <p
+                style={{
+                  padding: "0px",
+                  margin: "0px",
+                  fontWeight: "500",
+                  fontSize: "17px",
+                }}
+              >
+                ${price}
+              </p>
+            )}
           </div>
 
           <div

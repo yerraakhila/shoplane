@@ -11,9 +11,8 @@ function Products() {
   let wishlistItems = useSelector(currUserWishlistItemsList);
   let cartItemsList = useSelector(currUserCartItemsList);
 
-
-  let wishlistIdSet = new Set(wishlistItems.map(item => item.id));
-  let cartItemsIdSet = new Set(cartItemsList.map(item => item.id));
+  let wishlistIdSet = new Set(wishlistItems.map((item) => item.id));
+  let cartItemsIdSet = new Set(cartItemsList.map((item) => item.id));
 
   useEffect(() => {
     axios
@@ -23,12 +22,16 @@ function Products() {
   }, []);
 
   return (
-    <div className="prods">
-      <div style={{margin:"0px 25px"}} className="row cust-row">
+    <div className="prods" >
+      <div  style={{ padding: "50px 25px 5px 25px", margin:"0px"}}  className="row cust-row">
         {products.map((product) => (
-          
-          <NewProduct data={product} isInWishlist={wishlistIdSet.has(product.id)}
-          isInCart={cartItemsIdSet.has(product.id)} key={product.id} favPage={false} />
+          <NewProduct
+            data={product}
+            isInWishlist={wishlistIdSet.has(product.id)}
+            isInCart={cartItemsIdSet.has(product.id)}
+            key={product.id}
+            favPage={false}
+          />
         ))}
       </div>
     </div>

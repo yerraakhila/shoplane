@@ -27,6 +27,7 @@ function CartItem(props) {
         <div className="cart-img hover">
           <img src={image} width={200} height={200} onClick={handleClick} />
         </div>
+      
         <div className="details">
           <div className="heading">
             <h5>Brand</h5>
@@ -53,7 +54,7 @@ function CartItem(props) {
                   </h6>
                 </del>
                 <h6
-                  style={{ margin: "0px", color: "brown", fontWeight: "400" }}
+                  className="cart-off"
                 >
                   (30% off)
                 </h6>
