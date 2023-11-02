@@ -81,7 +81,7 @@ function NavbarWithSubcat({ categoryId }) {
              </Link>
            ))}
            </div>
-         <p style={{ margin: "0px", fontWeight: "600" }}>Menu</p>
+         <p style={{ margin: "0px", fontWeight: "600" }}>Filter</p>
        </div>
         <div className="icon profile">
           <button
