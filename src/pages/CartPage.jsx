@@ -7,7 +7,6 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 
 function CartPage(){
     let itemsInCart = useSelector(currUserCartItemsList);
-    console.log(itemsInCart)
     return(
         <div style={{backgroundColor:"#f7f0f0",minHeight:"100vh"}}>
             <NavbarWithSubcat/>

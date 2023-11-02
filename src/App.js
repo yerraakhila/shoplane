@@ -5,7 +5,6 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage'
 import HomePage from './pages/HomePage';
 import ProductDetailPage from './pages/ProductDetailPage';
-
 import ProductsByCategory from './pages/ProductsByCategoryPage';
 import CartPage from './pages/CartPage';
 import WishlistPage from './pages/WishlistPage';

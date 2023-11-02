@@ -11,9 +11,9 @@ export const CartSlice = createSlice({
     reducers: {
         addToCart: (state, action) => {
             let currentUser = getUser()
-            let obj = state.cartWithUserInfo.find((o) => o.user === currentUser)
+            let obj = state.cartWithUserInfo.find((eachObj) => eachObj.user === currentUser)
             if (obj) {
-                let cartItem = obj.cartInfo.cartItemsList.find((o) => o.id === action.payload.id)
+                let cartItem = obj.cartInfo.cartItemsList.find((eachItem) => eachItem.id === action.payload.id)
                 if (cartItem) {
                     cartItem.quantity++;
                 }

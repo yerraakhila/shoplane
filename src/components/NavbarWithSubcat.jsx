@@ -24,6 +24,7 @@ function NavbarWithSubcat({ categoryId }) {
   let loginStatus = getUser() ? true : false;
   function handleLogout() {
     clearUser();
+    localStorage.setItem("user", );
   }
 
   return (
@@ -51,7 +52,6 @@ function NavbarWithSubcat({ categoryId }) {
       </ul>
 
       <div className="nav-3icons">
-        <div class=" icon"></div>
         <div className="icon">
           <button
             class=""
@@ -65,11 +65,12 @@ function NavbarWithSubcat({ categoryId }) {
             }}
           >
             {loginStatus ? (
-              <span className="profile-deco">
+              
+              <span className="circle">
                 {getUser().charAt(0).toUpperCase()}
               </span>
             ) : (
-              <CgProfile size={40} />
+              <CgProfile size={30} />
             )}
           </button>
           {!loginStatus ? (
@@ -89,7 +90,7 @@ function NavbarWithSubcat({ categoryId }) {
             </div>
           ) : (
             <div class="dropdown-menu">
-              <Link class="dropdown-item" to="/" onClick={handleLogout}>
+              <Link class="dropdown-item" onClick={handleLogout} to="/">
                 Logout
               </Link>
               <Link class="dropdown-item" to="/wishlist">

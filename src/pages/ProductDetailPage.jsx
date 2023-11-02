@@ -3,15 +3,16 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart, deleteFromCart } from "../redux/reducers/CartSlice";
-import { AiFillStar } from "react-icons/ai";
-import NavAndSub from "./../components/NavAndSub";
+import { AiFillHeart, AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { currUserCartItemsList } from "../redux/reducers/CartSlice";
+import { currUserWishlistItemsList } from "../redux/reducers/WishlistSlice";
 import NavbarWithSubcat from "../components/NavbarWithSubcat";
+import { addToWishlist, deleteFromWishlist } from "../redux/reducers/WishlistSlice";
 
 function ProductDetailPage() {
+  
   const { id } = useParams();
-  console.log(id);
   const [product, setProduct] = useState({});
   useEffect(() => {
     axios
@@ -20,14 +21,20 @@ function ProductDetailPage() {
       .catch((error) => console.log(error));
   }, [id]);
   let cartItemsList = useSelector(currUserCartItemsList);
-  console.log(cartItemsList);
-  let isInCart = cartItemsList.some((each) => each.id === product.id);
-  console.log(isInCart);
+  let isInCart = cartItemsList.find((each) => each.id === product.id);
   let dispatch = useDispatch();
   function handleCart() {
     !isInCart
       ? dispatch(addToCart(product))
       : dispatch(deleteFromCart(product));
+  }
+  let wishlistItems = useSelector(currUserWishlistItemsList);
+  let isInWishlist = wishlistItems.find((item)=>item.id === product.id);
+
+  function handleFav() {
+    !isInWishlist
+      ? dispatch(addToWishlist(product))
+      : dispatch(deleteFromWishlist(product));
   }
 
   if (!product) return null;
@@ -51,7 +58,7 @@ function ProductDetailPage() {
             </div>
             <div className="col-sm-7 gap">
               <div className="spacing">
-                <h4>{product.title}</h4>
+                <h4>Brand, {product.title}</h4>
                 <p>{product.description.slice(0, 300)}</p>
               </div>
 
@@ -155,7 +162,13 @@ function ProductDetailPage() {
                     Estimated delivery on 20 Nov 2023
                   </p>
                 )}
+                <div style={{display:"flex", justifyContent:"center", alignItems:"center", gap:"30px",width:"100%"}}>
+                  {!isInWishlist ? 
+                  <AiOutlineHeart className="hover" size={60} onClick={handleFav}/>
+                   : <AiFillHeart className="hover red" size={60} onClick={handleFav}/>}
+                  
                 <button
+                style={{width:"100%",margin:"0px"}}
                   className={
                     !isInCart
                       ? "btn-blue-color white-color for-padding"
@@ -165,6 +178,7 @@ function ProductDetailPage() {
                 >
                   {!isInCart ? "Add to Cart" : "Remove from Cart"}
                 </button>
+                </div>
               </div>
             </div>
           </div>

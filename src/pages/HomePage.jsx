@@ -1,7 +1,4 @@
-import Navbar from "../components/Navbar";
-import Subcategories from "../components/Subcategories";
 import Products from "../components/Products";
-import NavAndSub from './../components/NavAndSub';
 import NavbarWithSubcat from "../components/NavbarWithSubcat";
 
 function HomePage(){

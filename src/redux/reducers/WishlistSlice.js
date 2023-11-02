@@ -13,30 +13,15 @@ export const WishlistSlice = createSlice({
             let currentUser = getUser()
             let obj = state.wishlistWithUserInfo.find((o) => o.user === currentUser)
             if (obj) {
-                let wishlistItem = obj.wishlistInfo.wishlistItemsList.find((o) => o.id === action.payload.id)
-                if (wishlistItem) {
-                    wishlistItem.quantity++;
-                }
-                else {
-                    let item = {
-                        ...action.payload,
-                        quantity: 1
-                    }
-                    obj.wishlistInfo.wishlistItemsList.push(item)
-                }
+                obj.wishlistInfo.wishlistItemsList.push(action.payload)
                 obj.wishlistInfo.wishlistItemsNum++
             }
             else {
-
-                let item = {
-                    ...action.payload,
-                    quantity: 1
-                }
                 let obj = {
                     user: currentUser,
                     wishlistInfo: {
                         wishlistItemsNum: 1,
-                        wishlistItemsList: [item]
+                        wishlistItemsList: [action.payload]
                     }
                 }
                 state.wishlistWithUserInfo.push(obj)
@@ -48,25 +33,10 @@ export const WishlistSlice = createSlice({
             let obj = state.wishlistWithUserInfo.find((o) => o.user === currentUser)
             if (obj) {
                 let index = obj.wishlistInfo.wishlistItemsList.findIndex(item => item.id === action.payload.id)
-                let itemQuantity = obj.wishlistInfo.wishlistItemsList[index].quantity
                 obj.wishlistInfo.wishlistItemsList.splice(index, 1)
-                obj.wishlistInfo.wishlistItemsNum -= itemQuantity
+                obj.wishlistInfo.wishlistItemsNum -= 1
             }
         },
-        decrementFromWishlist(state, action) {
-            let currentUser = getUser()
-            let obj = state.wishlistWithUserInfo.find((o) => o.user === currentUser)
-            if (obj) {
-                let index = obj.wishlistInfo.wishlistItemsList.findIndex(item => item.id === action.payload.id)
-                if (action.payload.quantity > 1) {
-                    obj.wishlistInfo.wishlistItemsList[index].quantity--
-                }
-                else {
-                    obj.wishlistInfo.wishlistItemsList.splice(index, 1)
-                }
-                obj.wishlistInfo.wishlistItemsNum--
-            }
-        }
     }
 });
 
@@ -86,6 +56,6 @@ export function currUserWishlistItemsList(state) {
     }
     return []
 }
-export const { addToWishlist, deleteFromWishlist, decrementFromWishlist } = WishlistSlice.actions;
+export const { addToWishlist, deleteFromWishlist } = WishlistSlice.actions;
 
 export default WishlistSlice.reducer;

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import NavbarWithSubcat from "../components/NavbarWithSubcat";
+
 
 function RegisterPage() {
   const initialValues = {
@@ -29,7 +29,6 @@ function RegisterPage() {
             textMessage: "Registration is successful. Click 'here' at bottom to login",
             alertClass: "alert alert-success",
           });
-          console.log(response.status)
         },
         (error) => {
           setResponseRequest({
@@ -57,7 +56,7 @@ function RegisterPage() {
       <div className="row" >
         <div className="col-md-3"></div>
         <div className="col-md-6">
-          <div className="wrapper" >
+          <div style={{padding:"25px"}} className="wrapper" >
     
           <div class={responseRequest.alertClass} role="alert">
               {responseRequest.textMessage}
@@ -115,7 +114,7 @@ function RegisterPage() {
                       <Field
                         name="mobile"
                         className={formik.touched.mobile && formik.errors.mobile ? "form-control is-invalid" : "form-control"}
-                        type="text"
+                        type="number"
                         style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">
@@ -127,7 +126,7 @@ function RegisterPage() {
                       <Field
                         name="password"
                         className={formik.touched.password && formik.errors.password ? "form-control is-invalid" : "form-control"}
-                        type="text"
+                        type="password"
                         style={{backgroundColor:"#f2f6f7"}}
                       />
                       <small className="text-danger">

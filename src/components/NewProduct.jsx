@@ -1,5 +1,4 @@
 import {
-  AiOutlineHeart,
   AiFillStar,
   AiFillHeart,
   AiOutlineClose,
@@ -20,7 +19,6 @@ function NewProduct(props) {
   let dispatch = useDispatch();
   let navigate = useNavigate();
   const { image, rating, price, title, id, category } = props.data;
-  console.log();
   function handleClick(e) {
     e.preventDefault();
     navigate("/productDetailPage/" + id);
@@ -72,7 +70,7 @@ function NewProduct(props) {
             className="ellipsis"
             style={{ padding: "0px", margin: "0px", marginTop: "10px" }}
           >
-            {title}
+            Brand, {title}
           </h6>
           <div className="p-side-side">
             <div className="style-star">

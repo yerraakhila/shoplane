@@ -15,7 +15,7 @@ function CartItems() {
       </div>}
 
       {!itemsInCart.length && <div className="empty">
-        <h2>Your Cart is Empty</h2>
+        <h2>Your Cart is Empty.</h2>
         <br />
         <h5 style={{color:"black"}}>(Add items from <Link to="/wishlist">Wishlist</Link>)</h5>
         </div>}

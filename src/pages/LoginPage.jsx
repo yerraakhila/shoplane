@@ -82,7 +82,7 @@ function LoginPage() {
                     <div className="form-group">
                       <label style={{fontWeight:"600"}}>Password</label>
                       <Field
-                        type="text" // Update it to password after testing end to end.
+                        type="password"
                         name="password"
                         className={
                           formik.touched.password && formik.errors.password

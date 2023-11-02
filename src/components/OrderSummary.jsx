@@ -16,7 +16,6 @@ function OrderSummary() {
     let totalDiscount = 0;
     for(let i=0;i<itemsInCart.length;i++){
       if(itemsInCart[i].category === "jewelery"){
-        console.log("hi")
         totalDiscount += ((itemsInCart[i].quantity)*(itemsInCart[i].price)*0.3)
       }
     }
@@ -42,10 +41,11 @@ function OrderSummary() {
         <h5 className="htag">Subtotal</h5>
         <h5 className="htag">${subTotal.toFixed(2)}</h5>
       </div>
-      <div className="order-summary-gap">
+      {discount ? <div className="order-summary-gap">
         <h5 className="htag">Discount</h5>
         <h5 className="htag">- ${discount.toFixed(2)}</h5>
-      </div>
+      </div> : <></>}
+      
       <div className="order-summary-gap">
         <h5 className="htag">Shopping Estimate</h5>
         <h5 className="htag">+ ${shopping.toFixed(2)}</h5>
@@ -71,7 +71,7 @@ function OrderSummary() {
       
     </div>
     <div class="text-center">
-    <button className="proceed" onClick={()=>navigate('/orderSuccess')}>Click here to Pay</button>
+    <button className="proceed" onClick={()=>navigate('/orderSuccess')}>Proceed to Pay</button>
     </div>
     
     </div>

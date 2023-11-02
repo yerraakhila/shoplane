@@ -1,9 +1,7 @@
-import Product from "../components/Product";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import NavAndSub from "../components/NavAndSub";
+import { useParams } from "react-router-dom";
 import NavbarWithSubcat from "../components/NavbarWithSubcat";
 import NewProduct from "../components/NewProduct";
 import { useSelector } from "react-redux/es/hooks/useSelector";
