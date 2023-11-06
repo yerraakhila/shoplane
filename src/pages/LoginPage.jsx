@@ -80,7 +80,7 @@ function LoginPage() {
                         </small>
                       </div>
                       <div className="form-group">
-                        <label style={{ fontWeight: "600" }}>Password</label>
+                        <label style={{ fontWeight: "600" }}>Password:</label>
                         <Field
                           type="password"
                           name="password"
